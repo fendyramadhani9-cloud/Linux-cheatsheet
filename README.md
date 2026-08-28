@@ -57,6 +57,7 @@ Seluruh modul dipisah secara sistematis berdasarkan domain fungsional sistem ope
 | 6 | **System Monitoring** | [06-system-monitoring.md](./06-system-monitoring.md) | Metrik USE method, monitoring CPU/Load Average (`uptime`, `top`, `htop`), RAM/Swap (`free`, `vmstat`), Disk Space (`df`, `du`), Jaringan/Port (`ss`, `lsof`), Log (`journalctl`, `dmesg`), dan checklist 60 detik. |
 | 7 | **I/O Monitoring** | [07-io-monitoring.md](./07-io-monitoring.md) | Analisis mendalam Disk & Network I/O, throughput, IOPS, latensi (`await`), saturasi (`%util`), pelacakan per-proses (`iotop`, `pidstat -d`), dan diagnosa IO Wait (`%wa`). |
 | 8 | **Linux Filesystems & VFS** | [08-linux-filesystems-and-vfs.md](./08-linux-filesystems-and-vfs.md) | Arsitektur VFS, variasi filesystem (Ext4, XFS, Btrfs), Journaling modes, Superblock, Inodes, Special FS (`proc`, `sys`, `tmpfs`), serta implementasi Hard & Soft Links. |
+| 9 | **Filesystem Features & Storage** | [09-filesystem-features-and-storage-management.md](./09-filesystem-features-and-storage-management.md) | Pembuatan filesystem (`mkfs`), perbaikan integritas (`fsck`), opsi mount/umount, persistent mounting `/etc/fstab`, NFS client, dan konfigurasi Swap Memory. |
 
 ---
 
@@ -73,6 +74,10 @@ Tabel contekan kilat perintah yang paling sering digunakan dalam operasional ser
 | **File Management** | `rm -rf <target>` | Menghapus file/folder secara paksa dan rekursif. |
 | **Filesystem & Link** | `ln -s <src> <link>` | Membuat symbolic/soft link menuju file atau direktori target. |
 | **Filesystem & Link** | `stat <file>` | Menampilkan rincian metadata Inode, hak akses, dan timestamp file. |
+| **Storage & Mount** | `sudo mount -a` | Me-mount seluruh partisi yang terdaftar di file `/etc/fstab` untuk validasi. |
+| **Storage & Mount** | `sudo mkfs.ext4 -L "DATA" /dev/sdb1` | Memformat partisi baru dengan sistem file Ext4 dan memberi label. |
+| **Storage & Mount** | `sudo fsck -y /dev/sdb1` | Memeriksa dan memperbaiki integritas filesystem secara otomatis. |
+| **Storage & Mount** | `sudo swapon --show` | Menampilkan kapasitas dan status aktif partisi/file swap memory. |
 | **Filesystem & Link** | `sudo tune2fs -l <partisi>` | Membaca konfigurasi Superblock dan status partisi filesystem Ext4. |
 | **Filesystem & Link** | `sudo xfs_growfs <mount>` | Memperluas kapasitas partisi filesystem XFS secara online. |
 | **Hak Akses** | `chmod 755 <file>` | Memberikan izin rwx untuk owner, serta r-x untuk group dan others. |

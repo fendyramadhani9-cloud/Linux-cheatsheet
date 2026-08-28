@@ -211,6 +211,6 @@ Setiap file di Linux diwakili oleh sebuah nomor unik bernama **Inode (*Index Nod
 
 ## 9. Navigasi Lanjutan Modul
 
-| Modul Sebelumnya | Indeks Dokumentasi |
+| Modul Sebelumnya | Modul Berikutnya |
 | :---: | :---: |
-| [07 - I/O Monitoring](./07-io-monitoring.md) | [README.md - Master Index](./README.md) |
+| [07 - I/O Monitoring](./07-io-monitoring.md) | [09 - Filesystem Features & Storage Management](./09-filesystem-features-and-storage-management.md) |
