@@ -54,7 +54,8 @@ Seluruh modul dipisah secara sistematis berdasarkan domain fungsional sistem ope
 | 3 | **Process Management** | [03-process-management.md](./03-process-management.md) | Siklus hidup proses, identitas PID/PPID, `ps aux`, `pstree`, background/foreground job control (`jobs`, `bg`, `fg`, `nohup`), prioritas `nice`/`renice`, dan struktur `/proc`. |
 | 4 | **Linux Signals** | [04-linux-signals.md](./04-linux-signals.md) | Konsep sinyal IPC kernel (SIGHUP, SIGINT, SIGKILL, SIGTERM), utilitas `kill`/`killall`/`pkill`, perbandingan terminasi aman vs paksa, serta signal trap pada Bash. |
 | 5 | **Package Management** | [05-package-management.md](./05-package-management.md) | Ekosistem Debian/Ubuntu (`apt`, `dpkg`), RHEL/CentOS/Rocky (`dnf`, `rpm`), tabel padanan perintah (*Rosetta Stone*), konfigurasi repositori, kunci GPG, dan kompilasi tarball. |
-| 6 | **System Monitoring** | [06-system-monitoring.md](./06-system-monitoring.md) | Metrik USE method, monitoring CPU/Load Average (`uptime`, `top`, `htop`), RAM/Swap (`free`, `vmstat`), Disk I/O (`df`, `du`, `iostat`), Jaringan/Port (`ss`, `lsof`), Log (`journalctl`, `dmesg`), dan checklist investigasi 60 detik. |
+| 6 | **System Monitoring** | [06-system-monitoring.md](./06-system-monitoring.md) | Metrik USE method, monitoring CPU/Load Average (`uptime`, `top`, `htop`), RAM/Swap (`free`, `vmstat`), Disk Space (`df`, `du`), Jaringan/Port (`ss`, `lsof`), Log (`journalctl`, `dmesg`), dan checklist 60 detik. |
+| 7 | **I/O Monitoring** | [07-io-monitoring.md](./07-io-monitoring.md) | Analisis mendalam Disk & Network I/O, throughput, IOPS, latensi (`await`), saturasi (`%util`), pelacakan per-proses (`iotop`, `pidstat -d`), dan diagnosa IO Wait (`%wa`). |
 
 ---
 
@@ -83,6 +84,8 @@ Tabel contekan kilat perintah yang paling sering digunakan dalam operasional ser
 | **Monitoring** | `uptime` | Memeriksa beban kerja rata-rata (*Load Average*) dan durasi server menyala. |
 | **Monitoring** | `free -h` | Memeriksa ketersediaan memori fisik RAM dan alokasi Swap. |
 | **Monitoring** | `df -h` | Memeriksa sisa kapasitas penyimpanan di semua partisi storage. |
+| **I/O Profiling** | `iostat -xz 1 3` | Menganalisis saturasi baca/tulis disk (%util) dan latensi (await). |
+| **I/O Profiling** | `sudo iotop -o -P` | Menemukan proses spesifik yang sedang aktif melakukan I/O disk secara agresif. |
 | **Monitoring** | `sudo ss -tulpn` | Menampilkan seluruh port TCP/UDP yang sedang berstatus listening beserta nomor PID-nya. |
 | **Monitoring** | `sudo lsof -i :<port>` | Mencari proses spesifik yang sedang menggunakan port tertentu. |
 | **Monitoring** | `sudo journalctl -u <service> -f` | Memantau log service systemd secara langsung (*real-time follow*). |

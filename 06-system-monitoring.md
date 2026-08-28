@@ -160,6 +160,6 @@ Jalankan 6 perintah berikut secara runtut saat terjadi degradasi performa pada s
 
 ## 8. Navigasi Lanjutan Modul
 
-| Modul Sebelumnya | Indeks Dokumentasi |
+| Modul Sebelumnya | Modul Berikutnya |
 | :---: | :---: |
-| [05 - Package Management](./05-package-management.md) | [README.md - Master Index](./README.md) |
+| [05 - Package Management](./05-package-management.md) | [07 - I/O Monitoring](./07-io-monitoring.md) |
