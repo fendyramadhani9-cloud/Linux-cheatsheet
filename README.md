@@ -56,7 +56,7 @@ Seluruh modul dipisah secara sistematis berdasarkan domain fungsional sistem ope
 | 5 | **Package Management** | [05-package-management.md](./05-package-management.md) | Ekosistem Debian/Ubuntu (`apt`, `dpkg`), RHEL/CentOS/Rocky (`dnf`, `rpm`), tabel padanan perintah (*Rosetta Stone*), konfigurasi repositori, kunci GPG, dan kompilasi tarball. |
 | 6 | **System Monitoring** | [06-system-monitoring.md](./06-system-monitoring.md) | Metrik USE method, monitoring CPU/Load Average (`uptime`, `top`, `htop`), RAM/Swap (`free`, `vmstat`), Disk Space (`df`, `du`), Jaringan/Port (`ss`, `lsof`), Log (`journalctl`, `dmesg`), dan checklist 60 detik. |
 | 7 | **I/O Monitoring** | [07-io-monitoring.md](./07-io-monitoring.md) | Analisis mendalam Disk & Network I/O, throughput, IOPS, latensi (`await`), saturasi (`%util`), pelacakan per-proses (`iotop`, `pidstat -d`), dan diagnosa IO Wait (`%wa`). |
-| 8 | **Linux Filesystems & VFS** | [08-linux-filesystems-and-vfs.md](./08-linux-filesystems-and-vfs.md) | Arsitektur VFS, variasi filesystem (Ext4, XFS, Btrfs), Journaling modes, Superblock, Inodes, Special FS (`proc`, `sys`, `tmpfs`), dan praktikum Hard & Soft Links. |
+| 8 | **Linux Filesystems & VFS** | [08-linux-filesystems-and-vfs.md](./08-linux-filesystems-and-vfs.md) | Arsitektur VFS, variasi filesystem (Ext4, XFS, Btrfs), Journaling modes, Superblock, Inodes, Special FS (`proc`, `sys`, `tmpfs`), serta implementasi Hard & Soft Links. |
 
 ---
 

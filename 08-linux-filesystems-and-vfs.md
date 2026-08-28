@@ -1,6 +1,6 @@
 # 08 - Linux Filesystems and the VFS
 
-Panduan mendalam arsitektur sistem file Linux dan Virtual File System (VFS): variasi filesystem, mekanisme journaling, struktur blok Ext4 (Superblock & Block Groups), XFS, sistem file khusus (*special/pseudo filesystems*), struktur Inodes, serta implementasi praktis Hard Link dan Soft Link.
+Panduan mendalam arsitektur sistem file Linux dan Virtual File System (VFS): variasi filesystem, mekanisme journaling, struktur blok Ext4 (Superblock & Block Groups), XFS, sistem file khusus (*special/pseudo filesystems*), struktur Inodes, serta referensi lengkap Hard Link dan Symbolic Link.
 
 ---
 
@@ -12,7 +12,7 @@ Panduan mendalam arsitektur sistem file Linux dan Virtual File System (VFS): var
 - [5. Karakteristik & Utilitas XFS Filesystem](#5-karakteristik--utilitas-xfs-filesystem)
 - [6. Special & Pseudo Filesystems (proc, sysfs, devtmpfs, tmpfs)](#6-special--pseudo-filesystems-proc-sysfs-devtmpfs-tmpfs)
 - [7. Struktur & Karakteristik Inodes](#7-struktur--karakteristik-inodes)
-- [8. Praktikum Terpandu: Hard Links vs Soft Links (Lab 8.1 - 8.3)](#8-praktikum-terpandu-hard-links-vs-soft-links-lab-81---83)
+- [8. Referensi Teknis Hard Link & Symbolic Link](#8-referensi-teknis-hard-link--symbolic-link)
 - [9. Navigasi Lanjutan Modul](#9-navigasi-lanjutan-modul)
 
 ---
@@ -110,7 +110,7 @@ Filesystem Ext4 membagi partisi penyimpanan menjadi beberapa **Block Groups** un
 
 > [!NOTE]
 > **Superblock Backup:**
-> Linux otomatis membuat salinan cadangan (*backup superblocks*) di beberapa Block Group (misal blok 32768, 98304). Jika Superblock utama rusak, kamu bisa memperbaikinya dengan:
+> Linux otomatis membuat salinan cadangan (*backup superblocks*) di beberapa Block Group (misal blok 32768, 98304). Jika Superblock utama rusak, perbaikan dapat dilakukan dengan:
 > `sudo e2fsck -b 32768 /dev/sdb1`
 
 ---
@@ -182,78 +182,30 @@ Setiap file di Linux diwakili oleh sebuah nomor unik bernama **Inode (*Index Nod
 
 ---
 
-## 8. Praktikum Terpandu: Hard Links vs Soft Links (Lab 8.1 - 8.3)
+## 8. Referensi Teknis Hard Link & Symbolic Link
 
-### Perbandingan Fundamental Link
+### Perbandingan Fundamental
 
 | Parameter Evaluasi | Hard Link | Symbolic Link (Soft Link) |
 | :--- | :--- | :--- |
-| **Sifat Tautan** | Pointer langsung ke nomor Inode yang sama | File pointer baru berisi alamat path string file target |
-| **Nomor Inode** | Identik / Sama persis | Berbeda (Mengalokasikan Inode baru) |
-| **Lintas Partisi Storage** | Tidak didukung (Hanya dalam 1 partisi) | Didukung (Bisa lintas partisi & jaringan) |
-| **Tautan ke Folder** | Tidak diizinkan | Diizinkan |
-| **Jika File Asli Dihapus** | Data tetap utuh dan terbaca lewat hard link | Link menjadi rusak (*Dangling / Broken Link*) |
+| **Definisi** | Pointer tambahan langsung ke nomor Inode fisik yang sama | File pointer terpisah yang menyimpan alamat path target |
+| **Nomor Inode** | Identik / Sama persis dengan file target | Berbeda (Memiliki nomor Inode unik sendiri) |
+| **Dukungan Lintas Partisi** | Tidak didukung (Harus dalam 1 filesystem yang sama) | Didukung (Dapat melintasi partisi, disk, dan network) |
+| **Tautan ke Direktori** | Tidak diizinkan oleh sistem operasi | Didukung sepenuhnya |
+| **Dampak Penghapusan Target**| Data tetap utuh dan dapat dibaca via link | Link menjadi rusak (*Broken / Dangling Link*) |
+| **Alokasi Storage** | 0 byte tambahan (Hanya menambah Link Count di Inode) | Memakan beberapa byte kecil untuk menyimpan teks path |
 
----
+### Tabel Perintah Operasional Link
 
-### Lab 8.1: Membuat dan Menguji Hard Link
-
-```bash
-# 1. Buat direktori kerja dan file awal
-mkdir -p /tmp/link_lab && cd /tmp/link_lab
-echo "Linux Filesystem Lab 8.1" > original.txt
-
-# 2. Buat Hard Link menggunakan perintah 'ln'
-ln original.txt hardlink_file.txt
-
-# 3. Periksa nomor Inode dan Link Count (kolom ke-3 pada ls -l)
-ls -li original.txt hardlink_file.txt
-# Output: Kedua file memiliki nomor Inode yang SAMA dan Link Count bernilai 2
-
-# 4. Uji perubahan isi file (Keduanya akan selalu sinkron)
-echo "Penambahan baris baru" >> hardlink_file.txt
-cat original.txt
-
-# 5. Hapus file asli dan buktikan bahwa data tetap ada di hardlink
-rm original.txt
-cat hardlink_file.txt    # Data tetap bisa dibaca dengan sempurna!
-```
-
----
-
-### Lab 8.2: Membuat dan Menguji Soft Link (Symbolic Link)
-
-```bash
-# 1. Buat file target baru
-echo "Testing Soft Link Lab 8.2" > source.txt
-
-# 2. Buat Soft Link menggunakan opsi flag '-s'
-ln -s source.txt softlink_file.txt
-
-# 3. Periksa nomor Inode
-ls -li source.txt softlink_file.txt
-# Output: Nomor Inode BERBEDA, dan softlink_file.txt menunjuk -> source.txt
-
-# 4. Hapus file sumber dan perhatikan efek broken link
-rm source.txt
-cat softlink_file.txt    # Error: No such file or directory
-ls -l softlink_file.txt  # Link berubah warna merah (Broken Link)
-```
-
----
-
-### Lab 8.3: Membuat Link Antar Direktori & Mencari Hard Link Tersembunyi
-
-```bash
-# 1. Membuat Soft Link untuk direktori (Sangat sering digunakan di Nginx / Web server)
-mkdir -p /var/www/my_app
-ln -s /var/www/my_app /home/ubuntu/app_shortcut
-
-# 2. Mencari seluruh file di filesystem yang berbagi nomor Inode yang sama (Mencari Hardlink)
-find / -samefile /tmp/link_lab/hardlink_file.txt 2>/dev/null
-# atau mencari berdasarkan nomor Inode spesifik:
-find / -inum 1441852 2>/dev/null
-```
+| Kategori Operasi | Perintah Eksekusi | Deskripsi Teknis |
+| :--- | :--- | :--- |
+| **Membuat Hard Link** | `ln source_file.txt hardlink.txt` | Membuat duplikat pointer ke Inode yang sama. |
+| **Membuat Soft Link** | `ln -s /path/source /path/symlink` | Membuat symbolic link dengan opsi flag `-s`. |
+| **Soft Link Direktori** | `ln -s /var/www/app /home/user/app_link` | Membuat shortcut navigasi folder (standar pada web server Nginx). |
+| **Membaca Target Symlink**| `readlink /path/symlink` | Menampilkan path target asli yang ditunjuk oleh symbolic link. |
+| **Menghapus Link** | `unlink /path/link_file` | Menghapus link tanpa memengaruhi file sumber target. |
+| **Mencari Hardlink Terkait**| `find / -samefile /path/target 2>/dev/null` | Menemukan seluruh file yang berbagi nomor Inode yang sama. |
+| **Pencarian via Nomor Inode**| `find / -inum <nomor_inode> 2>/dev/null` | Menemukan seluruh nama file yang mengarah ke nomor Inode tertentu. |
 
 ---
 
