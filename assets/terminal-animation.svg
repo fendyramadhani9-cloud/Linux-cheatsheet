@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 240" width="100%" height="240">
+  <defs>
+    <linearGradient id="bg-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#020617"/>
+    </linearGradient>
+    <style>
+      .term-header { font-family: 'JetBrains Mono', 'Fira Code', monospace; font-size: 12px; fill: #94a3b8; }
+      .term-text { font-family: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace; font-size: 13px; fill: #f8fafc; }
+      .green { fill: #10b981; font-weight: bold; }
+      .cyan { fill: #38bdf8; font-weight: bold; }
+      .yellow { fill: #facc15; }
+      .purple { fill: #c084fc; }
+      .muted { fill: #64748b; }
+      @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+      .cursor { animation: blink 1s infinite; fill: #38bdf8; }
+    </style>
+  </defs>
+
+  <!-- Terminal Window -->
+  <rect x="0" y="0" width="800" height="240" rx="10" fill="url(#bg-grad)" stroke="#334155" stroke-width="1.5"/>
+
+  <!-- Top Bar -->
+  <rect x="0" y="0" width="800" height="34" rx="10" fill="#1e293b"/>
+  <rect x="0" y="24" width="800" height="10" fill="#1e293b"/>
+  
+  <!-- Window Controls -->
+  <circle cx="20" cy="17" r="6" fill="#ef4444"/>
+  <circle cx="38" cy="17" r="6" fill="#f59e0b"/>
+  <circle cx="56" cy="17" r="6" fill="#10b981"/>
+  
+  <text x="400" y="21" text-anchor="middle" class="term-header">fendy@platform-engineer-box:~ (zsh)</text>
+
+  <!-- Content Lines -->
+  <g transform="translate(24, 62)">
+    <!-- Line 1: Prompt -->
+    <text x="0" y="0" class="term-text">
+      <tspan class="green">fendy@infra</tspan><tspan class="muted">:</tspan><tspan class="cyan">~/linux-cheatsheet</tspan><tspan class="muted">$</tspan>
+      <tspan fill="#f8fafc"> neofetch --stdout</tspan>
+    </text>
+
+    <!-- Line 2: OS Info -->
+    <text x="0" y="24" class="term-text">
+      <tspan class="purple">OS</tspan><tspan class="muted">: </tspan><tspan fill="#e2e8f0">Linux x86_64 | Ubuntu 22.04 LTS (Jammy Jellyfish)</tspan>
+    </text>
+
+    <!-- Line 3: Host / Kernel -->
+    <text x="0" y="46" class="term-text">
+      <tspan class="purple">Kernel</tspan><tspan class="muted">: </tspan><tspan fill="#e2e8f0">5.15.0-101-generic</tspan>
+      <tspan class="muted"> | </tspan>
+      <tspan class="purple">Uptime</tspan><tspan class="muted">: </tspan><tspan class="yellow">45 days, 4 hours</tspan>
+    </text>
+
+    <!-- Line 4: Resources -->
+    <text x="0" y="68" class="term-text">
+      <tspan class="purple">Memory</tspan><tspan class="muted">: </tspan><tspan fill="#10b981">3.2Gi / 15Gi (Available: 12Gi)</tspan>
+      <tspan class="muted"> | </tspan>
+      <tspan class="purple">Load Avg</tspan><tspan class="muted">: </tspan><tspan class="green">0.15, 0.28, 0.40</tspan>
+    </text>
+
+    <!-- Line 5: Next Prompt -->
+    <text x="0" y="96" class="term-text">
+      <tspan class="green">fendy@infra</tspan><tspan class="muted">:</tspan><tspan class="cyan">~/linux-cheatsheet</tspan><tspan class="muted">$</tspan>
+      <tspan fill="#f8fafc"> cat 06-system-monitoring.md | grep "USE Method"</tspan>
+      <rect x="520" y="-12" width="8" height="15" class="cursor"/>
+    </text>
+  </g>
+</svg>
