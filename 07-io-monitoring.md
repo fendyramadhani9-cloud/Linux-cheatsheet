@@ -143,6 +143,6 @@ Ikuti tabel urutan berikut saat nilai `%wa` (*IO Wait*) pada server terdeteksi t
 
 ## 7. Navigasi Lanjutan Modul
 
-| Modul Sebelumnya | Indeks Dokumentasi |
+| Modul Sebelumnya | Modul Berikutnya |
 | :---: | :---: |
-| [06 - System Monitoring](./06-system-monitoring.md) | [README.md - Master Index](./README.md) |
+| [06 - System Monitoring](./06-system-monitoring.md) | [08 - Linux Filesystems and the VFS](./08-linux-filesystems-and-vfs.md) |

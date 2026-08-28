@@ -56,6 +56,7 @@ Seluruh modul dipisah secara sistematis berdasarkan domain fungsional sistem ope
 | 5 | **Package Management** | [05-package-management.md](./05-package-management.md) | Ekosistem Debian/Ubuntu (`apt`, `dpkg`), RHEL/CentOS/Rocky (`dnf`, `rpm`), tabel padanan perintah (*Rosetta Stone*), konfigurasi repositori, kunci GPG, dan kompilasi tarball. |
 | 6 | **System Monitoring** | [06-system-monitoring.md](./06-system-monitoring.md) | Metrik USE method, monitoring CPU/Load Average (`uptime`, `top`, `htop`), RAM/Swap (`free`, `vmstat`), Disk Space (`df`, `du`), Jaringan/Port (`ss`, `lsof`), Log (`journalctl`, `dmesg`), dan checklist 60 detik. |
 | 7 | **I/O Monitoring** | [07-io-monitoring.md](./07-io-monitoring.md) | Analisis mendalam Disk & Network I/O, throughput, IOPS, latensi (`await`), saturasi (`%util`), pelacakan per-proses (`iotop`, `pidstat -d`), dan diagnosa IO Wait (`%wa`). |
+| 8 | **Linux Filesystems & VFS** | [08-linux-filesystems-and-vfs.md](./08-linux-filesystems-and-vfs.md) | Arsitektur VFS, variasi filesystem (Ext4, XFS, Btrfs), Journaling modes, Superblock, Inodes, Special FS (`proc`, `sys`, `tmpfs`), dan praktikum Hard & Soft Links. |
 
 ---
 
@@ -70,6 +71,10 @@ Tabel contekan kilat perintah yang paling sering digunakan dalam operasional ser
 | **File Management** | `cp -rp <src> <dst>` | Menyalin folder secara rekursif dengan mempertahankan timestamp dan permission asli. |
 | **File Management** | `mv <src> <dst>` | Memindahkan file atau mengganti nama berkas/folder. |
 | **File Management** | `rm -rf <target>` | Menghapus file/folder secara paksa dan rekursif. |
+| **Filesystem & Link** | `ln -s <src> <link>` | Membuat symbolic/soft link menuju file atau direktori target. |
+| **Filesystem & Link** | `stat <file>` | Menampilkan rincian metadata Inode, hak akses, dan timestamp file. |
+| **Filesystem & Link** | `sudo tune2fs -l <partisi>` | Membaca konfigurasi Superblock dan status partisi filesystem Ext4. |
+| **Filesystem & Link** | `sudo xfs_growfs <mount>` | Memperluas kapasitas partisi filesystem XFS secara online. |
 | **Hak Akses** | `chmod 755 <file>` | Memberikan izin rwx untuk owner, serta r-x untuk group dan others. |
 | **Hak Akses** | `chmod 600 <key_file>` | Memberikan izin rw- khusus owner (standar private key SSH). |
 | **Kepemilikan** | `sudo chown -R user:group <dir>` | Mengubah kepemilikan user dan group secara rekursif pada seluruh direktori. |
