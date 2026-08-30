@@ -211,6 +211,6 @@ sudo sysctl -p
 
 ## 8. Navigasi Lanjutan Modul
 
-| Modul Sebelumnya | Indeks Dokumentasi |
-| :---: | :---: |
-| [08 - Linux Filesystems and the VFS](./08-linux-filesystems-and-vfs.md) | [README.md - Master Index](./README.md) |
+| Modul Sebelumnya | Indeks Dokumentasi | Modul Selanjutnya |
+| :---: | :---: | :---: |
+| [08 - Linux Filesystems and the VFS](./08-linux-filesystems-and-vfs.md) | [README.md - Master Index](./README.md) | [10 - Logical Volume Management (LVM)](./10-logical-volume-management.md) |

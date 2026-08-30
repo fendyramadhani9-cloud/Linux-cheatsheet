@@ -58,6 +58,7 @@ Seluruh modul dipisah secara sistematis berdasarkan domain fungsional sistem ope
 | 7 | **I/O Monitoring** | [07-io-monitoring.md](./07-io-monitoring.md) | Analisis mendalam Disk & Network I/O, throughput, IOPS, latensi (`await`), saturasi (`%util`), pelacakan per-proses (`iotop`, `pidstat -d`), dan diagnosa IO Wait (`%wa`). |
 | 8 | **Linux Filesystems & VFS** | [08-linux-filesystems-and-vfs.md](./08-linux-filesystems-and-vfs.md) | Arsitektur VFS, variasi filesystem (Ext4, XFS, Btrfs), Journaling modes, Superblock, Inodes, Special FS (`proc`, `sys`, `tmpfs`), serta implementasi Hard & Soft Links. |
 | 9 | **Filesystem Features & Storage** | [09-filesystem-features-and-storage-management.md](./09-filesystem-features-and-storage-management.md) | Pembuatan filesystem (`mkfs`), perbaikan integritas (`fsck`), opsi mount/umount, persistent mounting `/etc/fstab`, NFS client, dan konfigurasi Swap Memory. |
+| 10 | **Logical Volume Management** | [10-logical-volume-management.md](./10-logical-volume-management.md) | Arsitektur LVM (PV, VG, LV, PE/LE), utilitas `pv*`/`vg*`/`lv*`, alokasi volume dinamis, snapshot & restore, serta perluasan online (`lvextend -r`). |
 
 ---
 
@@ -80,6 +81,9 @@ Tabel contekan kilat perintah yang paling sering digunakan dalam operasional ser
 | **Storage & Mount** | `sudo swapon --show` | Menampilkan kapasitas dan status aktif partisi/file swap memory. |
 | **Filesystem & Link** | `sudo tune2fs -l <partisi>` | Membaca konfigurasi Superblock dan status partisi filesystem Ext4. |
 | **Filesystem & Link** | `sudo xfs_growfs <mount>` | Memperluas kapasitas partisi filesystem XFS secara online. |
+| **LVM Storage** | `sudo pvs && sudo vgs && sudo lvs` | Memeriksa ringkasan status Physical Volume, Volume Group, dan Logical Volume. |
+| **LVM Storage** | `sudo lvcreate -L 20G -n lv_app vg_data` | Membuat Logical Volume baru berukuran 20 GB pada Volume Group. |
+| **LVM Storage** | `sudo lvextend -r -l +100%FREE /dev/vg/lv` | Memperluas kapasitas Logical Volume & filesystem secara online hingga kapasitas maksimal. |
 | **Hak Akses** | `chmod 755 <file>` | Memberikan izin rwx untuk owner, serta r-x untuk group dan others. |
 | **Hak Akses** | `chmod 600 <key_file>` | Memberikan izin rw- khusus owner (standar private key SSH). |
 | **Kepemilikan** | `sudo chown -R user:group <dir>` | Mengubah kepemilikan user dan group secara rekursif pada seluruh direktori. |
